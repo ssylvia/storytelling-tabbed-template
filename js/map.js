@@ -133,7 +133,9 @@ function createMap() {
         map = response.map;
         eval("map" + [j] + " = response.map");
         _maps.push(response.map);
-        mapExtent = map.extent;
+        if(configOptions.syncMaps === true){
+            mapExtent = map.extent;
+        }
 
 
         dojo.connect(eval("map" + [j]), "onUpdateEnd", mapLoaded);
@@ -164,7 +166,7 @@ function createMap() {
 function initUI(layers) {
     //add chrome theme for popup
     dojo.addClass(eval("map" + [j]).infoWindow.domNode, "chrome");
-    //add the scalebar 
+    //add the scalebar
     var scalebar = new esri.dijit.Scalebar({
         map: eval("map" + [j]),
         scalebarUnit: i18n.viewer.main.scaleBarUnits //metric or english
